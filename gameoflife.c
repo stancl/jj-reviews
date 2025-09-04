@@ -113,7 +113,7 @@ void seed_cells(int width, int height, u8 cells[height][width]) {
 
 bool eof() {
     fd_set rfds;
-    struct timeval tv = { .tv_sec = 0, .tv_usec = 0};
+    struct timeval tv = { .tv_sec = 0, .tv_usec = 0 };
 
     FD_ZERO(&rfds);
     FD_SET(STDIN_FILENO, &rfds);
@@ -123,6 +123,7 @@ bool eof() {
             return 1;
         }
     }
+
     return 0;
 }
 
