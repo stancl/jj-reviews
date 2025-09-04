@@ -123,6 +123,7 @@ bool eof() {
             return 1;
         }
     }
+
     return 0;
 }
 
