@@ -111,7 +111,7 @@ void seed_cells(int width, int height, u8 cells[height][width]) {
     }
 }
 
-bool eof() {
+bool ctrld_pressed() {
     fd_set rfds;
     struct timeval tv = { .tv_sec = 0, .tv_usec = 0 };
 
@@ -270,7 +270,7 @@ int main(int argc, char **argv) {
             }
         }
 
-        if (eof()) {
+        if (ctrld_pressed()) {
             clear_screen_on_exit = false;
             exit(0);
         }
