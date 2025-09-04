@@ -111,6 +111,21 @@ void seed_cells(int width, int height, u8 cells[height][width]) {
     }
 }
 
+bool eof() {
+    fd_set rfds;
+    struct timeval tv = { .tv_sec = 0, .tv_usec = 0};
+
+    FD_ZERO(&rfds);
+    FD_SET(STDIN_FILENO, &rfds);
+
+    if (select(STDIN_FILENO + 1, &rfds, NULL, NULL, &tv) == 1) {
+        if (getchar() == EOF) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 typedef struct {
     u8  *cells;
     int width;
@@ -252,6 +267,11 @@ int main(int argc, char **argv) {
                 printf("Game over - all dead.\n");
                 exit(0);
             }
+        }
+
+        if (eof()) {
+            clear_screen_on_exit = false;
+            exit(0);
         }
 
         for (int i = 0; i < HISTORY_LENGTH; i++) {
